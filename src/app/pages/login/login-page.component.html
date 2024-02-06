@@ -1,0 +1,31 @@
+<app-loader *ngIf="loading() else content"></app-loader>
+
+<ng-template #content>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <p>{{'app.login.info_text' | transloco}}</p>
+        <form [formGroup]="form" (submit)="doLogin()">
+          <div class="form-group">
+            <label for="inputUsername">{{ "app.username" | transloco }}</label>
+            <input type="text" id="inputUsername" formControlName="username" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">{{ "app.password" | transloco }}</label>
+            <input type="password" id="inputPassword" formControlName="password" class="form-control" required />
+          </div>
+
+          <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
+            {{'app.login.submit' | transloco}}
+          </button>
+        </form>
+
+        @if (registrationsEnabled()) {
+          <hr>
+          <a routerLink="/register">{{'app.register_account' | transloco}}</a>
+        }
+
+      </div>
+    </div>
+  </div>
+</ng-template>

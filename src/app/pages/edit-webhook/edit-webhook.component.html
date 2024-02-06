@@ -1,0 +1,107 @@
+@if (loading()) {
+  <app-loader/>
+} @else {
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="form" (submit)="onSubmit()">
+          <div class="form-group">
+            <label for="inputUrl">
+              {{ 'app.url' | transloco }}
+            </label>
+            <input id="inputUrl" type="url" class="form-control" formControlName="url"/>
+          </div>
+          <div class="form-group">
+            <label for="inputMethod">{{ 'app.http.method' | transloco }}</label>
+            <select id="inputMethod" class="form-control" formControlName="method">
+              <option [value]="HttpMethod.Get">{{ HttpMethod.Get }}</option>
+              <option [value]="HttpMethod.Post">{{ HttpMethod.Post }}</option>
+              <option [value]="HttpMethod.Patch">{{ HttpMethod.Patch }}</option>
+              <option [value]="HttpMethod.Put">{{ HttpMethod.Put }}</option>
+              <option [value]="HttpMethod.Delete">{{ HttpMethod.Delete }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputObjectType">{{ 'app.object_type' | transloco }}</label>
+            @if (availableObjectTypes().length) {
+              <select id="inputObjectType" class="form-control" formControlName="objectType">
+                @for (objectType of availableObjectTypes(); track objectType) {
+                  <option [value]="objectType">{{ objectType }}</option>
+                }
+              </select>
+            } @else {
+              <p>{{ 'app.no_object_types' | transloco }}</p>
+            }
+          </div>
+          <div class="form-group">
+            <label for="inputOperation">{{ 'app.operation' | transloco }}</label>
+            <select id="inputOperation" class="form-control" formControlName="operation">
+              <option [value]="DatabaseOperation.Insert">{{ DatabaseOperation.Insert }}</option>
+              <option [value]="DatabaseOperation.Update">{{ DatabaseOperation.Update }}</option>
+              <option [value]="DatabaseOperation.Delete">{{ DatabaseOperation.Delete }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <app-checkbox formControlName="enabled" [onColor]="Color.Success" [offColor]="Color.Danger"
+                          [label]="'app.enabled' | transloco"/>
+          </div>
+          <div class="form-group">
+            <label for="inputBodyExpression">{{ 'app.body_expression' | transloco }}</label>
+            <textarea class="form-control" formControlName="bodyExpression" id="inputBodyExpression"
+                      aria-describedby="descriptionBodyExpression"></textarea>
+            <small id="descriptionBodyExpression">
+              <transloco key="app.body_expression.description"
+                         [params]="{documentationUrl: 'https://github.com/RikudouSage/LemmyWebhook?tab=readme-ov-file#expressions'}"/>
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="inputFilterExpression">{{ 'app.filter_expression' | transloco }}</label>
+            <textarea class="form-control" formControlName="filterExpression" id="inputFilterExpression"
+                      aria-describedby="descriptionFilterExpression"></textarea>
+            <small id="descriptionFilterExpression">
+              <transloco key="app.filter_expression.description"
+                         [params]="{documentationUrl: 'https://github.com/RikudouSage/LemmyWebhook?tab=readme-ov-file#basic-vs-enhanced-expressions'}"/>
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="inputEnhancedFilter">{{ 'app.enhanced_filter_expression' | transloco }}</label>
+            <textarea class="form-control" formControlName="enhancedFilter" id="inputEnhancedFilter"
+                      aria-describedby="descriptionEnhancedFilter"></textarea>
+            <small id="descriptionEnhancedFilter">
+              <transloco key="app.enhanced_filter_expression.description"
+                         [params]="{documentationUrl: 'https://github.com/RikudouSage/LemmyWebhook?tab=readme-ov-file#expressions'}"/>
+            </small>
+          </div>
+          <div class="form-group">
+            <label>{{ 'app.headers' | transloco }}</label>
+            @for (group of form.controls.headers.controls; track group) {
+              <div class="form-group">
+                <label for="headerName{{$index}}">{{ 'app.header.name' | transloco }}</label>
+                <input type="text" class="form-control" id="headerName{{$index}}" [formControl]="group.controls.name"/>
+
+                <label for="headerValue{{$index}}">{{ 'app.header.value' | transloco }}</label>
+                <input type="text" class="form-control" id="headerValue{{$index}}"
+                       [formControl]="group.controls.value"/>
+              </div>
+            } @empty {
+              <p>{{ 'app.no_headers' | transloco }}</p>
+            }
+            <p>
+              <button type="button" class="btn-sm btn-primary"
+                      (click)="addHeaderForm()">{{ 'app.add_header' | transloco }}
+              </button>
+            </p>
+          </div>
+          @if (isAdmin()) {
+            <div class="form-group">
+              <app-checkbox formControlName="anonymous" [label]="'app.anonymous' | transloco"/>
+            </div>
+          }
+          <hr>
+          <button type="submit" class="btn btn-primary" [disabled]="!form.valid">{{ 'app.save' | transloco }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+}
+

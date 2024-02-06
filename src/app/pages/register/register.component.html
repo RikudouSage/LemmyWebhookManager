@@ -1,0 +1,58 @@
+@if (loading()) {
+  <app-loader/>
+} @else {
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="form" (submit)="doRegister()">
+          <div class="form-group">
+            <label for="inputUsername">{{ "app.username" | transloco }}</label>
+            <input type="text" id="inputUsername" formControlName="username" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">{{ "app.password" | transloco }}</label>
+            <input type="password" id="inputPassword" formControlName="password" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label for="inputPasswordAgain">{{ "app.password_again" | transloco }}</label>
+            <input type="password" id="inputPasswordAgain" formControlName="passwordRepeat" class="form-control"
+                   required/>
+          </div>
+
+          <label for="scopeSelector">{{ 'app.scopes' | transloco }}</label>
+          <div class="d-flex">
+            <div class="form-group flex-grow-1 flex-shrink-1 mr-2">
+              <select class="form-control" id="scopeSelector" #scopeSelect [disabled]="!selectBoxScopes().length">
+                @for (option of selectBoxScopes(); track option) {
+                  <option [value]="option">{{ option }}</option>
+                } @empty {
+                  <option>{{'app.no_scopes' | transloco}}</option>
+                }
+              </select>
+            </div>
+            <div class="form-group flex-shrink-1">
+              <label>&nbsp;</label>
+              <button type="button" class="btn btn-primary" [disabled]="scopeSelect.disabled"
+                      (click)="addScope(scopeSelect.value)">{{ 'app.scopes.add' | transloco }}
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            @for (scope of scopesInForm(); track scope) {
+              <a class="btn btn-app tag-btn" (click)="removeScope(scope)">
+                <span class="badge bg-danger">x</span>
+                {{scope}}
+              </a>
+            }
+          </div>
+
+          <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
+            {{ 'app.register.submit' | transloco }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+}

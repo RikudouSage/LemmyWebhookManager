@@ -1,0 +1,16 @@
+<div
+  class="alert alert-dismissible"
+  [class.alert-success]="kind === MessageType.Success"
+  [class.alert-danger]="kind === MessageType.Error"
+  [class.alert-warning]="kind === MessageType.Warning"
+  *ngIf="!isDeleted()"
+>
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true" (click)="remove()">×</button>
+  <h5><i
+    class="icon fas fa-check"
+    [class.fa-check]="kind === MessageType.Success"
+    [class.fa-ban]="kind === MessageType.Error"
+    [class.fa-exclamation-triangle]="kind === MessageType.Warning"
+  ></i> {{ title | async }}</h5>
+  {{ message }}
+</div>

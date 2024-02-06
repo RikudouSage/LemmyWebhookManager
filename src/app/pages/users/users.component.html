@@ -1,0 +1,57 @@
+@if (loading()) {
+  <app-loader/>
+} @else {
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <table class="table-bordered table-striped table">
+          <tr>
+            <th>{{ 'app.username' | transloco }}</th>
+            <th>{{ 'app.granted_scopes' | transloco }}</th>
+            <th>{{ 'app.ungranted_scopes' | transloco }}</th>
+            <th>{{ 'app.enabled' | transloco }}</th>
+            <th>{{ 'app.actions' | transloco }}</th>
+          </tr>
+          @for (user of users(); track user.id) {
+            <tr>
+              <td>{{ user.attributes.username }}</td>
+              <td>
+                <ul>
+                  @for (item of user.scopes; track item) {
+                    <li><code>{{ item }}</code></li>
+                  } @empty {
+                    <li>{{ 'app.no_scopes' | transloco }}</li>
+                  }
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  @for (item of user.scopeRequests; track item) {
+                    <li><code>{{ item }}</code></li>
+                  } @empty {
+                    <li>{{ 'app.no_scopes' | transloco }}</li>
+                  }
+                </ul>
+              </td>
+              <td>
+                @if (user.attributes.enabled) {
+                  <span class="text-success">
+                    {{ 'app.yes' | transloco }}
+                  </span>
+                } @else {
+                  <span class="text-danger">
+                    {{ 'app.no' | transloco }}
+                  </span>
+                }
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">{{'app.delete' | transloco}}</button>
+              </td>
+            </tr>
+          }
+        </table>
+      </div>
+    </div>
+  </div>
+
+}

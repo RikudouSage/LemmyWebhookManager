@@ -1,0 +1,47 @@
+<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  <li class="nav-item">
+    <a routerLink="/" class="nav-link">
+      <i class="nav-icon fas fa-network-wired"></i>
+      <p>
+        {{ "app.webhooks" | transloco }}
+      </p>
+    </a>
+  </li>
+  @if (loggedIn()) {
+    @if (isAdmin()) {
+      <li class="nav-item">
+        <a routerLink="/users" class="nav-link">
+          <i class="nav-icon fas fa-user"></i>
+          <p>
+            {{ "app.title.users" | transloco }}
+          </p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/approval-queue" class="nav-link">
+          <i class="nav-icon fas fa-gavel"></i>
+          <p>
+            {{ "app.approval_queue" | transloco }}
+          </p>
+        </a>
+      </li>
+    }
+    <li class="nav-item">
+      <a href="javascript:void(0)" class="nav-link" (click)="logout()">
+        <i class="nav-icon fas fa-sign-out-alt"></i>
+        <p>
+          {{ "app.title.logout" | transloco }}
+        </p>
+      </a>
+    </li>
+  } @else {
+    <li class="nav-item">
+      <a routerLink="/" class="nav-link">
+        <i class="nav-icon fas fa-user"></i>
+        <p>
+          {{ "app.title.login" | transloco }}
+        </p>
+      </a>
+    </li>
+  }
+</ul>

@@ -1,0 +1,67 @@
+@if (loading()) {
+  <app-loader />
+} @else {
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-bordered">
+          <tr>
+            <th>{{'app.url' | transloco}}</th>
+            <th>{{'app.http.method' | transloco}}</th>
+            <th>{{'app.object_type' | transloco}}</th>
+            <th>{{'app.operation' | transloco}}</th>
+            <th>{{'app.enabled' | transloco}}</th>
+            @if (isAdmin()) {
+              <th>{{'app.owner' | transloco}}</th>
+            }
+            <th>{{'app.actions' | transloco}}</th>
+          </tr>
+          <tr>
+            <td [colSpan]="isAdmin() ? 7 : 6">
+              <a class="btn btn-primary" routerLink="/webhooks/create">{{'app.webhook.create' | transloco}}</a>
+            </td>
+          </tr>
+          @for (webhook of webhooks(); track webhook.id) {
+            <tr>
+              <td>
+                <a routerLink="/webhooks/detail/{{webhook.id}}">
+                  {{webhook.attributes.url}}
+                </a>
+              </td>
+              <td>
+                {{webhook.attributes.method}}
+              </td>
+              <td>
+                {{webhook.attributes.objectType}}
+              </td>
+              <td>
+                {{webhook.attributes.operation}}
+              </td>
+              <td>
+                {{webhook.attributes.enabled ? ('app.yes' | transloco) : ('app.no' | transloco)}}
+              </td>
+              @if (isAdmin()) {
+                <td>
+                  @if (webhook.relationships.user.data === null) {
+                    <code>N/A</code>
+                  } @else {
+                    <a routerLink="/users" [queryParams]="{id: webhook.relationships.user.data.id}">{{webhook.relationships.user.data.id}}</a>
+                  }
+                </td>
+              }
+              <td>
+                <a class="btn btn-danger" href="javascript:void(0)" (click)="deleteWebhook(webhook.id)">{{'app.delete' | transloco}}</a>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td [colSpan]="isAdmin() ? 7 : 6">
+                {{'app.no_webhook' | transloco}}
+              </td>
+            </tr>
+          }
+        </table>
+      </div>
+    </div>
+  </div>
+}

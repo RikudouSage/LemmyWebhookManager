@@ -1,0 +1,30 @@
+.user-panel .fediseer-badge {
+  $margin: 0.5vh;
+
+  width: auto;
+  display: block;
+  margin-bottom: $margin;
+
+  &:first-of-type {
+    margin-top: $margin * 2;
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+hr {
+  background: #4f5962;
+}
+
+.tiny {
+  font-size: 50%;
+}
+
+ngb-modal-window {
+  z-index: 5000;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

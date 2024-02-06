@@ -1,0 +1,16 @@
+{
+  "app.home": "Domů",
+  "app.version": "Verze: {{appVersion}}",
+  "app.title.login": "Přihlášení",
+  "app.login.info_text": "Před pokračováním se přihlašte",
+  "app.password": "Heslo",
+  "app.login.submit": "Přihlásit se",
+  "app.invalid_form": "Formulář není vyplněn správně.",
+  "app.login.invalid_password": "Zadané heslo není správné.",
+  "notification.error": "Chyba",
+  "notification.success": "Úspěch",
+  "notification.warning": "Varování",
+  "app.title.logout": "Odhlásit se",
+  "app.login.remember_me": "Zapamatovat si mě",
+  "app.username": "Uživatelské jméno"
+}
