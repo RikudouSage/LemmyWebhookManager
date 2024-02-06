@@ -13,16 +13,6 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - name: Extract Version Name
-        id: extract_version
-        uses: actions/github-script@v6
-        with:
-          result-encoding: string
-          script: |
-            if (context.payload.ref.startsWith('refs/tags/')) {
-              return context.payload.ref.replace(/refs\/tags\/v/, '');
-            }
-            return 'dev';
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up QEMU
@@ -44,7 +34,7 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=edge,branch=master
+            type=edge,branch=master,value=dev
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
