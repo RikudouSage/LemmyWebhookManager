@@ -15,3 +15,5 @@ services:
     environment:
       - API_URL=https://api.webhooks.lemmings.world # replace with your api url
 ```
+
+Don't forget to configure CORS for LemmyWebhook.
