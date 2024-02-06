@@ -7,9 +7,6 @@ export const IsAdminGuard: CanActivateFn = async (): Promise<boolean | UrlTree> 
   const router = inject(Router);
   const url = router.createUrlTree(['/login']);
 
-
-  return true;
-
   if (!authentication.isAdmin()) {
     return url;
   }
