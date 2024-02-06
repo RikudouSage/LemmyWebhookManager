@@ -34,7 +34,7 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=edge,branch=master,value=dev
+            type=match,pattern=master,value=dev
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
