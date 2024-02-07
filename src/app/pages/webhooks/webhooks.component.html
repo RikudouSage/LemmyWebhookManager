@@ -7,7 +7,7 @@
         <table class="table table-bordered">
           <tr>
             <th>{{'app.url' | transloco}}</th>
-            <th>{{'app.http.method' | transloco}}</th>
+            <th>{{'app.logs_enabled' | transloco}}</th>
             <th>{{'app.object_type' | transloco}}</th>
             <th>{{'app.operation' | transloco}}</th>
             <th>{{'app.enabled' | transloco}}</th>
@@ -29,7 +29,12 @@
                 </a>
               </td>
               <td>
-                {{webhook.attributes.method}}
+                @if (webhook.attributes.logResponses) {
+                  {{'app.yes' | transloco}}
+                  (<a routerLink="/webhooks/logs/{{webhook.id}}">{{'app.view_logs' | transloco}}</a>)
+                } @else {
+                  {{'app.no' | transloco}}
+                }
               </td>
               <td>
                 {{webhook.attributes.objectType}}

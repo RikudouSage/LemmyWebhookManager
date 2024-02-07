@@ -7,7 +7,7 @@ import {
   FlagsResponse,
   RestCollectionResponse,
   RestDetailResponse, Scope, ScopeDetailList, User,
-  Webhook, WebhookCreateData, WebhookUpdateData
+  Webhook, WebhookCreateData, WebhookResponse, WebhookUpdateData
 } from "../helper/http-types";
 
 @Injectable({
@@ -161,6 +161,14 @@ export class ApiService {
     return this.httpClient.delete<void>(`${environment.apiUrl}/rest/scopes/${scope.id}`).pipe(
       map(() => true),
       catchError(() => of(false)),
+    );
+  }
+
+  public getLogs(webhookId: number): Observable<WebhookResponse[]> {
+    return this.httpClient.get<RestCollectionResponse<WebhookResponse, void>>(
+      `${environment.apiUrl}/rest/webhook-responses?filter[webhook]=${webhookId}&sort=-created`
+    ).pipe(
+      map(response => response.data),
     );
   }
 }

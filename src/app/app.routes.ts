@@ -26,6 +26,11 @@ export const routes: Routes = [
     canActivate: [LoggedInGuard],
   },
   {
+    path: 'webhooks/logs/:id',
+    loadComponent: () => import('./pages/webhook-responses/webhook-responses.component').then(m => m.WebhookResponsesComponent),
+    canActivate: [LoggedInGuard],
+  },
+  {
     path: 'users',
     loadComponent: () => import('./pages/users/users.component').then(m => m.UsersComponent),
     canActivate: [LoggedInGuard],

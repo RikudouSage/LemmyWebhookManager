@@ -72,5 +72,12 @@
   "app.success.approve_scope_succeeded": "Scope was successfully approved.",
   "app.error.reject_scope_failed": "Scope rejecting failed, please try again later.",
   "app.success.reject_scope_succeeded": "Scope was successfully rejected.",
-  "app.log_responses": "Log webhook responses for debugging?"
+  "app.log_responses": "Log webhook responses for debugging?",
+  "app.view_logs": "view logs",
+  "app.webhook_logs": "Webhook logs",
+  "app.no_logs": "There are not logs for this webhook",
+  "app.no_body": "The response did not contain any body.",
+  "app.date": "Date",
+  "app.http.status_code": "Status code",
+  "app.http.body": "Body"
 }

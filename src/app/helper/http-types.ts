@@ -117,6 +117,27 @@ export interface Scope extends Entity {
   };
 }
 
+export interface WebhookResponse extends Entity {
+  type: 'webhook-response';
+  attributes: {
+    statusCode: number;
+    body: string | null;
+    headers: {
+      [header: string]: string[];
+    };
+    validUntil: string;
+    created: string;
+  };
+  relationships: {
+    webhook: {
+      data: {
+        id: number;
+        type: 'webhook';
+      };
+    };
+  };
+}
+
 export interface ScopeDetail {
   scope: string;
   granted: boolean;

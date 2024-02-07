@@ -1,0 +1,65 @@
+@if (loading()) {
+  <app-loader/>
+} @else {
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th>{{ 'app.date' | transloco }}</th>
+            <th>{{ 'app.http.status_code' | transloco }}</th>
+            <th>{{ 'app.http.body' | transloco }}</th>
+            <th>{{ 'app.headers' | transloco }}</th>
+          </tr>
+          @for (log of logs(); track log.id) {
+            <tr>
+              <td>{{ log.attributes.created | formatDatetime }}</td>
+              <td
+                [class.text-success]="log.attributes.statusCode >= 200 && log.attributes.statusCode < 300"
+                [class.text-warning]="log.attributes.statusCode >= 300 && log.attributes.statusCode < 400"
+                [class.text-danger]="log.attributes.statusCode < 200 || log.attributes.statusCode >= 400"
+              >
+                {{ log.attributes.statusCode }}
+              </td>
+              <td>
+                @if (log.attributes.body !== null) {
+                  <code>
+                    <pre>{{ log.attributes.body }}</pre>
+                  </code>
+                } @else {
+                  {{ 'app.no_body' | transloco }}
+                }
+              </td>
+              <td>
+                <ul>
+                  @for (headerPair of log.attributes.headers | keyvalue; track headerPair.key) {
+                    <li>
+                      <code>{{headerPair.key}}:</code>
+                      @if (headerPair.value.length > 1) {
+                        <ul>
+                          @for (value of headerPair.value; track value) {
+                            <li><code>{{value}}</code></li>
+                          }
+                        </ul>
+                      } @else {
+                        <code> {{headerPair.value[0]}}</code>
+                      }
+                    </li>
+                  } @empty {
+                    <li>{{'app.no_headers' | transloco}}</li>
+                  }
+                </ul>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4">
+                {{ 'app.no_logs' | transloco }}
+              </td>
+            </tr>
+          }
+        </table>
+      </div>
+    </div>
+  </div>
+}
