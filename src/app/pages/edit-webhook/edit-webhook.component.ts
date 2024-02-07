@@ -95,6 +95,7 @@ export class EditWebhookComponent implements OnInit {
         filterExpression: webhook.attributes.filterExpression,
         enhancedFilter: webhook.attributes.enhancedFilter,
         anonymous: webhook.relationships.user.data === null,
+        logResponses: webhook.attributes.logResponses,
       });
       const headers = webhook.attributes.headers;
       if (headers) {
