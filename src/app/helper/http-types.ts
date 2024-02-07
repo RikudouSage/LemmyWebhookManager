@@ -50,6 +50,7 @@ interface WebhookAttributes {
   headers: { [header: string]: string } | null;
   enhancedFilter: string | null;
   enabled: boolean;
+  logResponses: boolean;
 }
 
 interface WebhookRelationships {

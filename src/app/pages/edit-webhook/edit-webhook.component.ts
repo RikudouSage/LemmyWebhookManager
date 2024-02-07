@@ -55,6 +55,7 @@ export class EditWebhookComponent implements OnInit {
       value: FormControl<string | null>,
     }>>([]),
     anonymous: new FormControl<boolean>(false),
+    logResponses: new FormControl<boolean>(false),
   });
 
   constructor(
@@ -143,6 +144,7 @@ export class EditWebhookComponent implements OnInit {
           filterExpression: (value.filterExpression ?? null) || null,
           enhancedFilter: (value.enhancedFilter ?? null) || null,
           headers: value.headers?.length ? {} : null,
+          logResponses: value.logResponses ?? false,
         },
       };
     } else {
@@ -158,6 +160,7 @@ export class EditWebhookComponent implements OnInit {
           filterExpression: (value.filterExpression ?? null) || null,
           enhancedFilter: (value.enhancedFilter ?? null) || null,
           headers: value.headers?.length ? {} : null,
+          logResponses: value.logResponses ?? false,
         },
       };
     }

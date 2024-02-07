@@ -71,5 +71,6 @@
   "app.error.approve_scope_failed": "Scope approval failed, please try again later.",
   "app.success.approve_scope_succeeded": "Scope was successfully approved.",
   "app.error.reject_scope_failed": "Scope rejecting failed, please try again later.",
-  "app.success.reject_scope_succeeded": "Scope was successfully rejected."
+  "app.success.reject_scope_succeeded": "Scope was successfully rejected.",
+  "app.log_responses": "Log webhook responses for debugging?"
 }
