@@ -56,6 +56,7 @@ export class EditWebhookComponent implements OnInit {
     }>>([]),
     anonymous: new FormControl<boolean>(false),
     logResponses: new FormControl<boolean>(false),
+    uniqueMachineName: new FormControl<string | null>(null),
   });
 
   constructor(
@@ -96,6 +97,7 @@ export class EditWebhookComponent implements OnInit {
         enhancedFilter: webhook.attributes.enhancedFilter,
         anonymous: webhook.relationships.user.data === null,
         logResponses: webhook.attributes.logResponses,
+        uniqueMachineName: webhook.attributes.uniqueMachineName,
       });
       const headers = webhook.attributes.headers;
       if (headers) {
@@ -146,6 +148,7 @@ export class EditWebhookComponent implements OnInit {
           enhancedFilter: (value.enhancedFilter ?? null) || null,
           headers: value.headers?.length ? {} : null,
           logResponses: value.logResponses ?? false,
+          uniqueMachineName: value.uniqueMachineName || null,
         },
       };
     } else {
@@ -162,6 +165,7 @@ export class EditWebhookComponent implements OnInit {
           enhancedFilter: (value.enhancedFilter ?? null) || null,
           headers: value.headers?.length ? {} : null,
           logResponses: value.logResponses ?? false,
+          uniqueMachineName: value.uniqueMachineName || null,
         },
       };
     }

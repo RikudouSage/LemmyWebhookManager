@@ -171,4 +171,13 @@ export class ApiService {
       map(response => response.data),
     );
   }
+
+  public importWebhooks(configuration: string): Observable<boolean> {
+    return this.httpClient.post<void>(`${environment.apiUrl}/api/webhooks/import`, {
+      configuration: configuration,
+    }).pipe(
+      map(() => true),
+      catchError(() => of(false)),
+    );
+  }
 }
