@@ -1,11 +1,16 @@
-<div class="col-md-12">
+@if (loading()) {
+  <app-loader />
+}
+
+<div class="col-md-12" [hidden]="loading()">
   <div class="card">
     <div class="card-body">
       <p><transloco key="app.webhook.import.description" /></p>
       <hr>
-      <form [formGroup]="form">
+      <form [formGroup]="form" (submit)="import()">
         <div class="form-group">
-
+          <label>{{'app.import.yaml_content' | transloco}}</label>
+          <div #editor></div>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.webhook.import.submit' | transloco}}</button>
       </form>
