@@ -87,5 +87,7 @@ export class WebhookImportComponent implements OnInit, AfterViewInit {
         this.messageService.createSuccess(this.translator.get('app.webhook.import.success'));
       });
     }
+
+    this.loading.set(false);
   }
 }
