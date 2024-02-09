@@ -83,7 +83,7 @@
   "app.webhook.import": "Import webhooks",
   "app.webhook.import.description": "[p]This allows you to easily import large amounts of webhooks in a single go.[/p][p]Only webhooks which have a unique machine name can be imported, meaning you can import the same file more than once and no duplicates will be created - webhooks with the same unique machine name will be updated instead of recreated.[/p][p]This is useful for system that provide integration to webhooks or for sharing your configuration with others.[/p]",
   "app.webhook.import.submit": "Import",
-  "app.import.yaml_content": "YAML configuration to import",
+  "app.import.yaml_content": "YAML (or JSON) configuration to import",
   "app.webhook.import.error": "There was an error while importing the webhooks, please try again later.",
   "app.webhook.import.success": "The webhooks were successfully imported.",
   "app.logs_enabled": "Logs enabled?",
