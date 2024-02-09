@@ -51,6 +51,7 @@ interface WebhookAttributes {
   enhancedFilter: string | null;
   enabled: boolean;
   logResponses: boolean;
+  uniqueMachineName: string | null;
 }
 
 interface WebhookRelationships {

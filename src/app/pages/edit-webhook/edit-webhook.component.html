@@ -76,6 +76,13 @@
             </small>
           </div>
           <div class="form-group">
+            <label for="inputUniqueMachineName">{{'app.unique_machine_name' | transloco}}</label>
+            <input type="text" class="form-control" formControlName="uniqueMachineName" id="inputUniqueMachineName" aria-describedby="descriptionUniqueMachineName" />
+            <small id="descriptionUniqueMachineName">
+              <transloco key="app.unique_machine_name.description" />
+            </small>
+          </div>
+          <div class="form-group">
             <label>{{ 'app.headers' | transloco }}</label>
             @for (group of form.controls.headers.controls; track group) {
               <div class="form-group">
