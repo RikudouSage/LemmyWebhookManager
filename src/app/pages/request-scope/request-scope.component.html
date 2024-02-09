@@ -1,0 +1,33 @@
+@if (loading()) {
+  <app-loader />
+} @else {
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        @if (ungrantedScopes().length) {
+          @if (grantedScopes().length) {
+            <p>{{'app.scope_request.granted_list' | transloco}}</p>
+            <ul>
+              @for (scope of grantedScopes(); track scope) {
+                <li>{{scope}}</li>
+              }
+            </ul>
+          }
+          <form [formGroup]="form" (submit)="submitForm()">
+            <div class="form-group">
+              <label for="inputScope">{{'app.scope_request.description' | transloco}}</label>
+              <select class="form-control" id="inputScope" formControlName="scope">
+                @for (scope of ungrantedScopes(); track scope) {
+                  <option [value]="scope">{{scope}}</option>
+                }
+              </select>
+            </div>
+            <button [disabled]="!form.valid" type="submit" class="btn btn-primary">{{'app.scope_request.submit' | transloco}}</button>
+          </form>
+        } @else {
+          <p>{{'app.scope_request.all_scopes_granted' | transloco}}</p>
+        }
+      </div>
+    </div>
+  </div>
+}
