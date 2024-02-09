@@ -11,9 +11,9 @@ ENV NG_CLI_ANALYTICS="false"
 COPY package.json /app/package.json
 COPY yarn.lock /app/yarn.lock
 
+WORKDIR /app
 RUN yarn install
 
 COPY . /app
-WORKDIR /app
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker-build.sh /docker-entrypoint.d/99-docker-build.sh
