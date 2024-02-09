@@ -1,0 +1,14 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <p><transloco key="app.webhook.import.description" /></p>
+      <hr>
+      <form [formGroup]="form">
+        <div class="form-group">
+
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">{{'app.webhook.import.submit' | transloco}}</button>
+      </form>
+    </div>
+  </div>
+</div>

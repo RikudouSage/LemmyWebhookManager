@@ -19,6 +19,8 @@
           <tr>
             <td [colSpan]="isAdmin() ? 7 : 6">
               <a class="btn btn-primary" routerLink="/webhooks/create">{{'app.webhook.create' | transloco}}</a>
+              &nbsp;
+              <a class="btn btn-info" routerLink="/webhooks/import">{{'app.webhook.import' | transloco}}</a>
             </td>
           </tr>
           @for (webhook of webhooks(); track webhook.id) {
