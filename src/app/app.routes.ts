@@ -49,5 +49,10 @@ export const routes: Routes = [
     path: 'approval-queue',
     loadComponent: () => import('./pages/approval-queue/approval-queue.component').then(m => m.ApprovalQueueComponent),
     canActivate: [LoggedInGuard, IsAdminGuard],
-  }
+  },
+  {
+    path: 'request-scope',
+    loadComponent: () => import('./pages/request-scope/request-scope.component').then(m => m.RequestScopeComponent),
+    canActivate: [LoggedInGuard],
+  },
 ];

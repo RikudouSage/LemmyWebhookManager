@@ -25,6 +25,15 @@
           </p>
         </a>
       </li>
+    } @else {
+      <li class="nav-item">
+        <a routerLink="/request-scope" class="nav-link">
+          <i class="nav-icon fas fa-user-shield"></i>
+          <p>
+            {{ "app.scope_request" | transloco }}
+          </p>
+        </a>
+      </li>
     }
     <li class="nav-item">
       <a href="javascript:void(0)" class="nav-link" (click)="logout()">

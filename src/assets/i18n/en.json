@@ -88,5 +88,13 @@
   "app.webhook.import.success": "The webhooks were successfully imported.",
   "app.logs_enabled": "Logs enabled?",
   "app.unique_machine_name": "Unique machine name",
-  "app.unique_machine_name.description": "This is the unique machine name that is used for imports and exports. [b]You don't need to set this field.[/b]"
+  "app.unique_machine_name.description": "This is the unique machine name that is used for imports and exports. [b]You don't need to set this field.[/b]",
+  "app.scope_request": "Request a scope",
+  "app.scope_request.description": "Please select a scope you wish to be granted from the list below.",
+  "app.scope_request.all_scopes_granted": "You've already been granted all possible scopes. What an achievement!",
+  "app.scope_request.granted_list": "You've already been granted the following scopes:",
+  "app.scope_request.submit": "Ask for scope",
+  "app.scope_request.success": "Successfully asked for a new scope",
+  "app.scope_request.error.already_asked": "You have already asked for this scope, please wait until the admins either approve or reject your request.",
+  "app.scope_request.error": "There was an error while asking for the scope, please try again later."
 }

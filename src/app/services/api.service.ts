@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {catchError, map, Observable, of} from "rxjs";
 import {
@@ -178,6 +178,25 @@ export class ApiService {
     }).pipe(
       map(() => true),
       catchError(() => of(false)),
+    );
+  }
+
+  public askForScope(scope: string): Observable<boolean | null> {
+    return this.httpClient.post<void>(`${environment.apiUrl}/auth/scopes`, {
+      scope: scope,
+    }, {
+      observe: 'response',
+    }).pipe(
+      map(response => response.status >= 200 && response.status < 300),
+      catchError(e => {
+        const status = (<HttpErrorResponse>e).status;
+        switch (status) {
+          case 409:
+            return of(null);
+          default:
+            return of(false);
+        }
+      }),
     );
   }
 }
