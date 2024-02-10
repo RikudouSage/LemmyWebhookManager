@@ -1,19 +1,14 @@
-FROM nginx
-
-RUN apt-get update && \
-    apt-get -y install nodejs npm && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    npm install --global yarn
+FROM node:20 as build
 
 ENV NG_CLI_ANALYTICS="false"
 
-COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
-
+COPY . /app
 WORKDIR /app
 RUN yarn install
+RUN yarn build
 
-COPY . /app
+FROM nginx
+
+COPY --from=build /app/dist/simple-app-template /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker-build.sh /docker-entrypoint.d/99-docker-build.sh

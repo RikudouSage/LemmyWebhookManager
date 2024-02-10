@@ -1,5 +1,5 @@
 export const environment = {
   appTitle: 'Lemmy Webhooks',
   appVersion: '1.2.4',
-  apiUrl: 'https://api.webhooks.lemmings.world',
+  apiUrl: typeof (<any>window)['API_URL'] !== 'undefined' ? (<any>window)['API_URL'] : 'https://api.webhooks.lemmings.world',
 };
