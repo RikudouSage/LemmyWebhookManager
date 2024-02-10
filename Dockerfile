@@ -9,6 +9,6 @@ RUN yarn build
 
 FROM nginx
 
-COPY --from=build /app/dist/simple-app-template /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY docker-build.sh /docker-entrypoint.d/99-docker-build.sh
+COPY --from=build /app/dist/simple-app-template /usr/share/nginx/html
