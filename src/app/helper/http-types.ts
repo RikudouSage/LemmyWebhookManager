@@ -1,5 +1,6 @@
 import {HttpMethod} from "../enum/http-method";
 import {DatabaseOperation} from "../enum/database-operation";
+import {SigningMode} from "../enum/signing-mode.enum";
 
 export interface CredentialsResponse {
   token: string;
@@ -52,6 +53,8 @@ interface WebhookAttributes {
   enabled: boolean;
   logResponses: boolean;
   uniqueMachineName: string | null;
+  signingMode: SigningMode;
+  signingKey: string | null;
 }
 
 interface WebhookRelationships {

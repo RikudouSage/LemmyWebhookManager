@@ -83,6 +83,30 @@
             </small>
           </div>
           <div class="form-group">
+            <label for="inputSigningMode">{{ 'app.signing_mode' | transloco }}</label>
+            <select id="inputSigningMode" class="form-control" formControlName="signingMode" aria-describedby="inputSigningModeDescription">
+              <option [value]="SigningMode.None">{{'app.signing_mode.none' | transloco}}</option>
+              <option [value]="SigningMode.Symmetric">{{ 'app.signing_mode.symmetric' | transloco }}</option>
+            </select>
+            <small id="inputSigningModeDescription">
+              <transloco key="app.signing_mode.description" [params]="{standardsLink: 'https://github.com/standard-webhooks/standard-webhooks/blob/bece768d960f09e242f5cd5686d859e475d6b478/spec/standard-webhooks.md'}" />
+            </small>
+          </div>
+          @if (form.value.signingMode === SigningMode.Symmetric) {
+            <div class="form-group">
+              <label for="inputSigningKey">
+                {{ 'app.signing_key' | transloco }}
+              </label>
+              <div class="w-100 d-flex">
+                <input id="inputSigningKey" type="text" class="form-control mr-2" formControlName="signingKey" aria-describedby="inputSigningKeyDescription"/>
+                <button (click)="generateSymmetricKey()" class="btn btn-secondary" type="button">{{'app.generate_key' | transloco}}</button>
+              </div>
+              <small id="inputSigningKeyDescription">
+                <transloco key="app.signing_key.description" />
+              </small>
+            </div>
+          }
+          <div class="form-group">
             <label>{{ 'app.headers' | transloco }}</label>
             @for (group of form.controls.headers.controls; track group) {
               <div class="form-group">
