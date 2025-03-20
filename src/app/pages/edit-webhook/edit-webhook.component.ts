@@ -14,6 +14,7 @@ import {TranslocoMarkupComponent} from "ngx-transloco-markup";
 import {WebhookCreateData, WebhookUpdateData} from "../../helper/http-types";
 import {MessageService} from "../../services/message.service";
 import {AuthenticationService} from "../../services/authentication.service";
+import {SigningMode} from "../../enum/signing-mode.enum";
 
 @Component({
   selector: 'app-edit-webhook',
@@ -32,6 +33,7 @@ export class EditWebhookComponent implements OnInit {
   protected readonly HttpMethod = HttpMethod;
   protected readonly DatabaseOperation = DatabaseOperation;
   protected readonly Color = Color;
+  protected readonly SigningMode = SigningMode;
 
   private webhookId: WritableSignal<number | null> = signal(null);
   private formReady = signal(false);
@@ -57,6 +59,8 @@ export class EditWebhookComponent implements OnInit {
     anonymous: new FormControl<boolean>(false),
     logResponses: new FormControl<boolean>(false),
     uniqueMachineName: new FormControl<string | null>(null),
+    signingMode: new FormControl<SigningMode>(SigningMode.None),
+    signingKey: new FormControl<string | null>(null),
   });
 
   constructor(
@@ -98,6 +102,8 @@ export class EditWebhookComponent implements OnInit {
         anonymous: webhook.relationships.user.data === null,
         logResponses: webhook.attributes.logResponses,
         uniqueMachineName: webhook.attributes.uniqueMachineName,
+        signingMode: webhook.attributes.signingMode,
+        signingKey: webhook.attributes.signingKey,
       });
       const headers = webhook.attributes.headers;
       if (headers) {
@@ -149,6 +155,8 @@ export class EditWebhookComponent implements OnInit {
           headers: value.headers?.length ? {} : null,
           logResponses: value.logResponses ?? false,
           uniqueMachineName: value.uniqueMachineName || null,
+          signingMode: value.signingMode || SigningMode.None,
+          signingKey: value.signingKey || null,
         },
       };
     } else {
@@ -166,6 +174,8 @@ export class EditWebhookComponent implements OnInit {
           headers: value.headers?.length ? {} : null,
           logResponses: value.logResponses ?? false,
           uniqueMachineName: value.uniqueMachineName || null,
+          signingMode: value.signingMode || SigningMode.None,
+          signingKey: value.signingKey || null,
         },
       };
     }
@@ -204,5 +214,19 @@ export class EditWebhookComponent implements OnInit {
 
     await this.router.navigateByUrl('/');
     this.messageService.createSuccess(message);
+  }
+
+  public async generateSymmetricKey() {
+    const key = await crypto.subtle.generateKey({
+      name: 'HMAC',
+      hash: 'SHA-256',
+    }, true, ['sign', 'verify']);
+    const exported = await crypto.subtle.exportKey('raw', key);
+    const keyBytes = new Uint8Array(exported);
+    const base64Key = btoa(String.fromCharCode(...keyBytes));
+
+    const finalKey = `whsec_${base64Key}`;
+
+    this.form.patchValue({signingKey: finalKey});
   }
 }
