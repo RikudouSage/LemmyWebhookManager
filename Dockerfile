@@ -2,8 +2,12 @@ FROM node:20 as build
 
 ENV NG_CLI_ANALYTICS="false"
 
-COPY . /app
 WORKDIR /app
+COPY package.json package.json
+COPY yarn.lock yarn.lock
+RUN yarn install
+
+COPY . .
 RUN yarn install
 RUN yarn build
 
