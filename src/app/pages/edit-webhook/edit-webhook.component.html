@@ -49,6 +49,9 @@
             <app-checkbox formControlName="logResponses" [label]="'app.log_responses' | transloco"/>
           </div>
           <div class="form-group">
+            <app-checkbox formControlName="retryOnFailure" [label]="'app.retry_on_failure' | transloco" />
+          </div>
+          <div class="form-group">
             <label for="inputBodyExpression">{{ 'app.body_expression' | transloco }}</label>
             <textarea class="form-control" formControlName="bodyExpression" id="inputBodyExpression"
                       aria-describedby="descriptionBodyExpression"></textarea>

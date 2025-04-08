@@ -61,6 +61,7 @@ export class EditWebhookComponent implements OnInit {
     uniqueMachineName: new FormControl<string | null>(null),
     signingMode: new FormControl<SigningMode>(SigningMode.None),
     signingKey: new FormControl<string | null>(null),
+    retryOnFailure: new FormControl(false),
   });
 
   constructor(
@@ -104,6 +105,7 @@ export class EditWebhookComponent implements OnInit {
         uniqueMachineName: webhook.attributes.uniqueMachineName,
         signingMode: webhook.attributes.signingMode,
         signingKey: webhook.attributes.signingKey,
+        retryOnFailure: webhook.attributes.retryOnFailure,
       });
       const headers = webhook.attributes.headers;
       if (headers) {
@@ -157,6 +159,7 @@ export class EditWebhookComponent implements OnInit {
           uniqueMachineName: value.uniqueMachineName || null,
           signingMode: value.signingMode || SigningMode.None,
           signingKey: value.signingKey || null,
+          retryOnFailure: value.retryOnFailure || false,
         },
       };
     } else {
@@ -176,6 +179,7 @@ export class EditWebhookComponent implements OnInit {
           uniqueMachineName: value.uniqueMachineName || null,
           signingMode: value.signingMode || SigningMode.None,
           signingKey: value.signingKey || null,
+          retryOnFailure: value.retryOnFailure || false,
         },
       };
     }
