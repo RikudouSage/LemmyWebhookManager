@@ -103,5 +103,6 @@
   "app.signing_mode.description": "You can choose the signature mode. If you choose different option than [b]{{app.signing_mode.none}}[/b], the signature will be created according to the [link:standardsLink]Standard Webhook specification[/link].",
   "app.signing_key": "Signing key",
   "app.signing_key.description": "The signing key should be between 192 and 512 bits long, base64 encoded and then prefixed with [i]whsec_[/i]. You can also click the [b]{{app.generate_key}}[/b] button to generate a new key. They key will be created locally in your browser.",
-  "app.generate_key": "Generate key"
+  "app.generate_key": "Generate key",
+  "app.retry_on_failure": "Retry the webhook for unsuccessful status codes?"
 }

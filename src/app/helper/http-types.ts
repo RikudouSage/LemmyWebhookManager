@@ -55,6 +55,7 @@ interface WebhookAttributes {
   uniqueMachineName: string | null;
   signingMode: SigningMode;
   signingKey: string | null;
+  retryOnFailure: boolean;
 }
 
 interface WebhookRelationships {
